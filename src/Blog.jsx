@@ -1,11 +1,11 @@
 export default function Blog() {
     return (
         <article className="blog">
-            <h2 className="blog-title">My First React Page — Excited to Learn React!</h2>
+            <h2 className="blog-title">My First React Page</h2>
             <p className="blog-date">March 28, 2026 &bull; CR Development</p>
 
             <p>
-                I am excited to be learning React! Building my very first project —{" "}
+                Building my very first project —{" "}
                 <strong>first-react</strong> — has already taught me several React concepts , and I want to
                 share everything that went into creating it.
             </p>
