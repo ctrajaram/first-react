@@ -31,7 +31,7 @@ npm run dev`}</pre>
             <ul>
                 <li>
                     <strong>Header.jsx</strong> — displays the React logo and a navigation bar
-                    with links for Pricing, About, and Contact.
+                    with links for About, and Contact.
                 </li>
                 <li>
                     <strong>MainContent.jsx</strong> — the heart of the page, showing my list of
