@@ -2,7 +2,7 @@ export default function Blog() {
     return (
         <article className="blog">
             <h2 className="blog-title">My First React Page</h2>
-            <p className="blog-date">March 28, 2026 &bull; CR Development</p>
+            <p className="blog-date">March 28, 2026</p>
 
             <p>
                 Building my very first project —{" "}
