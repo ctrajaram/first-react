@@ -9,6 +9,7 @@ export default function App() {
     return (
         <div className="page">
             <Header />
+            <MainContent />
             <Blog />
             <Footer />
         </div>
