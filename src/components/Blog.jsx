@@ -118,16 +118,89 @@ export default function App() {
     gap: 24px;
 }`}</pre>
 
+            <h3>Step 4: Adding Pages with React Router</h3>
+            <p>
+                With a single page working, the next step was adding multiple pages — Home, About,
+                and Contact. React apps don't reload the browser when navigating, so I used{" "}
+                <strong>React Router</strong> to handle this.
+            </p>
+            <pre className="code-block">{`npm install react-router-dom`}</pre>
+            <p>
+                In <strong>App.jsx</strong> I wrapped the app in a <code>BrowserRouter</code> and
+                defined a route for each page using <code>Routes</code> and <code>Route</code>:
+            </p>
+            <pre className="code-block">{`import { Routes, Route } from 'react-router-dom'
+
+<Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/contact" element={<Contact />} />
+</Routes>`}</pre>
+            <p>
+                The Header and Footer stay fixed outside the Routes so they appear on every page.
+                Only the middle content swaps out depending on the URL.
+            </p>
+
+            <h3>Step 5: Building the About Page with a Profile Card</h3>
+            <p>
+                The About page features a profile card built from three smaller components, each
+                responsible for one section:
+            </p>
+            <ul>
+                <li><strong>CardHeader</strong> — profile photo, name, title, and email button</li>
+                <li><strong>CardAbout</strong> — a short about section</li>
+                <li><strong>CardInterests</strong> — personal interests</li>
+            </ul>
+            <p>
+                All three are composed inside a <strong>Card</strong> wrapper component using the{" "}
+                <code>children</code> prop — so Card doesn't need to know what's inside it:
+            </p>
+            <pre className="code-block">{`export default function Card({ children }) {
+    return (
+        <div className="card">
+            {children}
+        </div>
+    )
+}`}</pre>
+
+            <h4>Centering the card on the page</h4>
+            <p>
+                The About page wrapper uses Flexbox to center the card both horizontally and
+                vertically:
+            </p>
+            <pre className="code-block">{`.about {
+    display: flex;
+    justify-content: center;   /* horizontal */
+    align-items: center;       /* vertical */
+    flex: 1;                   /* fills height between header and footer */
+    padding: 40px 20px;
+}`}</pre>
+
+            <h4>Image flush to card edges</h4>
+            <p>
+                A key technique — the card has <code>overflow: hidden</code> which clips the photo
+                corners to match the card's rounded corners. The image uses{" "}
+                <code>width: 100%</code> and <code>display: block</code> to fill the card edge to
+                edge with no gap underneath.
+            </p>
+
+            <h4>Separating image from content padding</h4>
+            <p>
+                The card header has no padding so the image goes flush to the edges. A separate{" "}
+                <code>.card-header-body</code> div wraps just the text and button with padding —
+                so only the content has breathing room, not the image.
+            </p>
+
             <h3>What I Learned</h3>
             <ul>
                 <li>How to scaffold a React + Vite project from scratch.</li>
                 <li>How to write functional components and export/import them.</li>
                 <li>How to compose a full page from small, focused components.</li>
-                <li>
-                    How CSS Flexbox properties — <code>flex-direction</code>,{" "}
-                    <code>justify-content</code>, <code>align-items</code>, <code>flex: 1</code>,
-                    and <code>gap</code> — work together to control layout.
-                </li>
+                <li>How CSS Flexbox — <code>flex-direction</code>, <code>justify-content</code>, <code>align-items</code>, <code>flex: 1</code>, and <code>gap</code> — controls layout.</li>
+                <li>How React Router enables multi-page navigation without browser reloads.</li>
+                <li>How the <code>children</code> prop makes wrapper components flexible and reusable.</li>
+                <li>How <code>overflow: hidden</code> clips child elements to rounded card corners.</li>
+                <li>How to separate image and content padding to achieve flush full-width images.</li>
             </ul>
 
             <p>

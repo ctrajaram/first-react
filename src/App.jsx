@@ -1,17 +1,23 @@
 import './App.css'
-import Header from './Header'
-import Footer from './Footer'
-import MainContent from './MainContent'
-import Blog from './Blog'
+import { Routes, Route } from 'react-router-dom'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
+
 
 
 export default function App() {
     return (
         <div className="page">
             <Header />
-            <MainContent />
-            <Blog />
-            <Footer />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
+            <Footer year={2026} name="CR Development" />
         </div>
     )
 }
