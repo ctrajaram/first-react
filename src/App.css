@@ -111,7 +111,9 @@ h1 {
 .about {
     display: flex;
     justify-content: center;
-    align-items: center;
+  align-items: stretch;
+  gap: 24px;
+  flex-wrap: wrap;
     flex: 1;
     padding: 40px 20px;
 }

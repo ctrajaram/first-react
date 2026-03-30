@@ -79,6 +79,39 @@ index.html → main.jsx (BrowserRouter) → App.jsx
 - Single Page App (SPA) navigation without page reload
 - Importing assets (images/SVGs) in Vite
 
+### Lesson 1: Props
+
+This lesson uses two places in the app to demonstrate props:
+
+- `Footer` receives `year` and `name` from `App.jsx`
+- `Card` receives profile data from `About.jsx`
+
+#### Footer props
+
+`App.jsx` passes values into the component:
+
+```jsx
+<Footer year={2026} name="CR Development" />
+```
+
+`Footer.jsx` receives those values in its parameter list:
+
+```jsx
+export default function Footer({ year, name }) {
+  return <small>&copy; {year} {name}. All rights reserved.</small>
+}
+```
+
+#### Reusable Card props
+
+Instead of hardcoding the About card with separate child components, `Card` now receives its content through props like `name`, `role`, `email`, `about`, and `interests`.
+
+That makes the component reusable: `About.jsx` can render multiple cards with different data while keeping the same structure and styling.
+
+#### Key idea
+
+Props are how parent components send data to child components. They make components flexible, reusable, and easier to maintain.
+
 ### React Router Setup — What We Did and Why
 
 #### 1. Installed the package (npm)
