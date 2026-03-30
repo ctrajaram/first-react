@@ -1,5 +1,52 @@
 import { useState } from 'react'
 
+// Mock data — same as backend/main.py
+// Used as fallback when FastAPI is not running (e.g. deployed on Vercel)
+const MOCK_DATA = {
+    "123": {
+        employee_id: "123",
+        name: "Alice Johnson",
+        department: "Engineering",
+        attributes: [
+            { key: "skill", value: "Python" },
+            { key: "skill", value: "React" },
+            { key: "level", value: "Senior" },
+            { key: "team", value: "Platform" },
+        ],
+    },
+    "456": {
+        employee_id: "456",
+        name: "Bob Smith",
+        department: "Data Science",
+        attributes: [
+            { key: "skill", value: "SQL" },
+            { key: "skill", value: "Spark" },
+            { key: "level", value: "Mid" },
+            { key: "team", value: "Analytics" },
+        ],
+    },
+    "789": {
+        employee_id: "789",
+        name: "Carol Davis",
+        department: "Design",
+        attributes: [
+            { key: "skill", value: "Figma" },
+            { key: "skill", value: "CSS" },
+            { key: "level", value: "Lead" },
+            { key: "team", value: "Product" },
+        ],
+    },
+}
+
+// Fallback search — uses mock data when FastAPI is unavailable
+function searchMock(employeeId) {
+    const result = MOCK_DATA[employeeId]
+    if (result) {
+        return { found: true, data: result }
+    }
+    return { found: false, data: null }
+}
+
 export default function Search() {
     // State for the search input — what the user types
     const [searchId, setSearchId] = useState("")
@@ -26,35 +73,28 @@ export default function Search() {
         setResults(null)
         setError(null)
 
-        // Step 2: Try to fetch data from FastAPI
+        // Step 2: Try FastAPI first, fall back to mock data
         try {
-            // fetch() sends a GET request to our FastAPI server
-            // The ?employee_id=123 part is called a "query parameter"
-            // FastAPI reads it as the "employee_id" argument in our endpoint
+            // Try to call FastAPI (works locally when backend is running)
             const response = await fetch(
                 `http://localhost:8000/api/search?employee_id=${searchId}`
             )
 
-            // response.ok is true if the server returned a success status (200)
-            // If the server returned an error (500, 404, etc.), we throw an error
             if (!response.ok) {
                 throw new Error("Server error: " + response.status)
             }
 
-            // Convert the response body from JSON text to a JavaScript object
-            // This gives us the { found: true, data: { ... } } object from FastAPI
             const data = await response.json()
-
-            // Step 3: Store the result in state — React re-renders and shows it
             setResults(data)
 
         } catch (err) {
-            // If anything went wrong (network down, server error, bad JSON)
-            // catch grabs the error so the app doesn't crash
-            setError(err.message)
+            // FastAPI not available (e.g. deployed on Vercel) — use mock data
+            // This catches both network errors and server errors
+            console.log("FastAPI unavailable, using mock data:", err.message)
+            const mockResult = searchMock(searchId)
+            setResults(mockResult)
+
         } finally {
-            // "finally" runs whether it succeeded or failed
-            // Either way, we're done loading
             setLoading(false)
         }
     }
