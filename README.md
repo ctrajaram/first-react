@@ -98,7 +98,11 @@ This lesson uses two places in the app to demonstrate props:
 
 ```jsx
 export default function Footer({ year, name }) {
-  return <small>&copy; {year} {name}. All rights reserved.</small>
+  return (
+    <small>
+      &copy; {year} {name}. All rights reserved.
+    </small>
+  );
 }
 ```
 
@@ -115,22 +119,27 @@ Props are how parent components send data to child components. They make compone
 ### React Router Setup — What We Did and Why
 
 #### 1. Installed the package (npm)
+
 ```bash
 npm install react-router-dom
 ```
+
 - **What:** Downloaded `react-router-dom` from npm
 - **Why:** React has no built-in routing. This library lets us show different pages based on the URL without reloading the browser.
 
 #### 2. Wrapped App with BrowserRouter (`main.jsx`)
+
 ```jsx
 <BrowserRouter>
   <App />
 </BrowserRouter>
 ```
+
 - **What:** Added `<BrowserRouter>` around `<App />` in `main.jsx`
 - **Why:** React Router needs this wrapper to track URL changes. Without it, `<Routes>` and `<Link>` won't work. We put it in `main.jsx` (not `App.jsx`) so the entire app has access to routing.
 
 #### 3. Created pages folder (`src/pages/`)
+
 - `Home.jsx` — reuses existing MainContent + Blog components
 - `About.jsx` — new page
 - `Contact.jsx` — new page
@@ -138,32 +147,44 @@ npm install react-router-dom
 - **Why:** Separates full screens (`pages/`) from reusable UI pieces (`components/`). This is a common convention — pages are what the user sees, components are the building blocks.
 
 #### 4. Added Routes to App.jsx
+
 ```jsx
 <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/contact" element={<Contact />} />
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
 </Routes>
 ```
+
 - **What:** Replaced `<MainContent />` and `<Blog />` with `<Routes>` containing three `<Route>` entries
 - **Why:** This tells React — when URL is `/`, render Home. When `/about`, render About. Header and Footer sit outside `<Routes>` so they're always visible on every page.
 
 #### 5. Updated Header with Link (`Header.jsx`)
+
 ```jsx
 <Link to="/about">About</Link>
 ```
+
 - **What:** Replaced plain `<li>` text with `<Link to="...">` from React Router
 - **Why:** `<Link>` navigates without reloading the page — it just swaps the content area. A normal `<a href>` would cause a full browser refresh, losing the SPA (Single Page App) benefit. Also wrapped the logo in `<Link to="/">` so clicking it goes home.
 
 #### 6. Styled the nav links (`App.css`)
+
 ```css
-.nav-list a { color: white; text-decoration: none; }
-.nav-list a:hover { color: #61dafb; }
+.nav-list a {
+  color: white;
+  text-decoration: none;
+}
+.nav-list a:hover {
+  color: #61dafb;
+}
 ```
+
 - **What:** Added CSS for the links
 - **Why:** `<Link>` renders as a default blue underlined `<a>` tag. These styles make it match the dark theme — white text, no underline, blue on hover.
 
 #### Key Takeaway
+
 React Router turns a React app into a **Single Page App (SPA)** — one HTML page where JavaScript swaps the content based on the URL. The browser never reloads. Header, Footer, and any shared layout stay fixed while only the page content changes.
 
 ### Getting Started
