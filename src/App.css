@@ -155,3 +155,93 @@ h1 {
     color: #ccc;
     margin: 0;
 }
+
+/* Search page */
+.search-form {
+    display: flex;              /* input and button side by side */
+    gap: 12px;                  /* space between them */
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+.search-form input {
+    flex: 1;                    /* input takes remaining width */
+    padding: 12px 16px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #1a1c1e;
+    color: white;
+    font-size: 1rem;
+}
+
+.search-form input::placeholder {
+    color: #888;
+}
+
+.search-form button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: #61dafb;        /* React blue */
+    color: #1a1c1e;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #4fc3f7;        /* slightly darker on hover */
+}
+
+.search-status {
+    margin-top: 20px;
+    color: #aaa;
+}
+
+.search-error {
+    margin-top: 20px;
+    color: #ff6b6b;
+}
+
+.search-results {
+    margin-top: 30px;
+}
+
+.employee-info {
+    background: #1a1c1e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width:500px;
+}
+
+.employee-info h2 {
+    margin: 0 0 8px 0;
+}
+
+.employee-info p {
+    margin: 4px 0;
+    color: #aaa;
+}
+
+.attributes-table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;     /* removes gaps between cells */
+}
+
+.attributes-table th,
+.attributes-table td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.attributes-table th {
+    color: #61dafb;
+    font-weight: bold;
+}
+
+.attributes-table tr:last-child td {
+    border-bottom: none;           /* no border on last row */
+}
